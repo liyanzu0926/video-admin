@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class AdminDTO {
 
-    // 接收和返回都为：name
+    // 序列化和反序列化为：name
     @JsonProperty("name")
     private String username;
     private String avatar;

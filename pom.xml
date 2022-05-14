@@ -40,6 +40,8 @@
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <lombok.version>1.16.18</lombok.version>
+        <pagehelper.version>5.2.0</pagehelper.version>
+        <hutool-all.version>5.8.0</hutool-all.version>
     </properties>
 
     <!--    springboot 父项目-->
@@ -100,6 +102,19 @@
                 <version>${lombok.version}</version>
                 <optional>true</optional>
             </dependency>
+            <!--分页插件-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
+            <!--糊涂工具包-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-all.version}</version>
+            </dependency>
+
 
 
         </dependencies>

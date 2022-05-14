@@ -13,7 +13,7 @@ import java.util.List;
 public interface CategoryService {
     List<CategoryDTO> query();
 
-    Category update(Integer id, Category category);
+    Category update(Category category);
 
     CategoryDTO insert(Category category);
 

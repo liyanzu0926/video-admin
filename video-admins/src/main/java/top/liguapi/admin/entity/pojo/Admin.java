@@ -1,9 +1,14 @@
 package top.liguapi.admin.entity.pojo;
 
+import org.apache.ibatis.javassist.SerialVersionUID;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class Admin implements Serializable {
+
+    private static final long serialVersionUID = -3134284377972452930L;
+
     private Integer id;
 
     private String username;

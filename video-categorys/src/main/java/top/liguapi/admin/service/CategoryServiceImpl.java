@@ -28,18 +28,19 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category update(Integer id, Category category) {
+    public Category update(Category category) {
         CategoryExample categoryExample = new CategoryExample();
-        categoryExample.createCriteria().andIdEqualTo(id);
+        categoryExample.createCriteria().andIdEqualTo(category.getId());
         category.setUpdatedAt(new Date());
         categoryMapper.updateByExampleSelective(category, categoryExample);
-        return categoryMapper.selectByPrimaryKey(id);
+        return categoryMapper.selectByPrimaryKey(category.getId());
     }
 
     @Override
     public CategoryDTO insert(Category category) {
-        category.setCreatedAt(new Date());
-        category.setUpdatedAt(new Date());
+        Date date = new Date();
+        category.setCreatedAt(date);
+        category.setUpdatedAt(date);
         categoryMapper.insertSelective(category);
         CategoryDTO categoryDTO = new CategoryDTO();
         BeanUtils.copyProperties(category, categoryDTO);
@@ -48,6 +49,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void delete(Integer id) {
-        // TODO: 2022/5/13  
+        CategoryExample example = new CategoryExample();
+        example.createCriteria().andIdEqualTo(id);
+        example.or().andParentIdEqualTo(id);
+        categoryMapper.deleteByExample(example);
     }
 }

@@ -11,7 +11,7 @@ public class Category {
 
     private String name;
 
-    // 接收和返回都为：parent_id
+    // 序列化和反序列化为：parent_id
     @JsonProperty("parent_id")
     private Integer parentId;
 

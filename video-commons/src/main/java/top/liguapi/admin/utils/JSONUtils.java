@@ -12,7 +12,7 @@ public class JSONUtils {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
 
-    public static String writeToJSON(Object o) {
+    public static String writeValueAsString(Object o) {
         String s = null;
         try {
             s = objectMapper.writeValueAsString(o);
