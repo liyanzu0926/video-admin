@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import top.liguapi.admin.entity.pojo.Admin;
 import top.liguapi.admin.entity.pojo.AdminExample;
+import top.liguapi.admin.exception.AdminsException;
+import top.liguapi.admin.exception.AdminsExceptionEnum;
 import top.liguapi.admin.mapper.AdminMapper;
 
 import java.util.List;
@@ -26,10 +28,10 @@ public class AdminServiceImpl implements AdminService {
         adminExample.createCriteria().andUsernameEqualTo(admin.getUsername());
         List<Admin> admins = adminMapper.selectByExample(adminExample);
         // 判断用户名
-        if (admins == null || admins.size() == 0) throw new RuntimeException("用户名错误！");
+        if (admins == null || admins.size() == 0) throw new AdminsException(AdminsExceptionEnum.USERNAME_ERROR);
         // 判断密码
         String password = DigestUtils.md5DigestAsHex(admin.getPassword().getBytes());
-        if (!password.equals(admins.get(0).getPassword())) throw new RuntimeException("密码错误！");
+        if (!password.equals(admins.get(0).getPassword())) throw new AdminsException(AdminsExceptionEnum.PASSWORD_ERROR);
         return admins.get(0);
     }
 }

@@ -1,0 +1,48 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: VIDEO-GATEWAY
+  cloud:
+    nacos:
+      server-addr: 192.168.150.3:8848
+    gateway:
+      routes:
+        - id: admins_router
+          uri: lb://VIDEO-ADMINS
+          predicates:
+            - Path=/admin/tokens, /admin/admin-user, /admin/tokens/**
+          filters:
+            - Token=true
+
+        - id: users_router
+          uri: lb://VIDEO-USERS
+          predicates:
+            - Path=/admin/users
+          filters:
+            - Token=true
+
+        - id: videos_router
+          uri: lb://VIDEO-VIDEOS
+          predicates:
+            - Path=/admin/videos
+          filters:
+            - Token=true
+
+        - id: categorys_router
+          uri: lb://VIDEO-CATEGORYS
+          predicates:
+            - Path=/admin/categories, /admin/categories/**
+          filters:
+            - Token=true
+
+      # 跨域配置
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+  redis:
+    host: 192.168.150.3
+    port: 6379
